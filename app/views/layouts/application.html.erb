@@ -12,6 +12,10 @@
 
   <body>
     <div class='container'>
+      <% if !devise_controller? %>
+        <%= render 'layouts/navbar' %>
+      <% end %>
+      <p id="notice"><%= notice %></p>
       <%= yield %>
     </div>
   </body>

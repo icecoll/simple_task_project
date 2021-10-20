@@ -1,0 +1,13 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">Backlogs</a>
+    <div class="d-flex">
+      <% if current_user %>
+        <span class="navbar-text me-4 text-dark">Hi, <%= current_user.username %></span>
+        <%= link_to "logout", destroy_user_session_path, class: "btn btn-outline-secondary", method: :delete %>
+      <% else %>
+        <%= link_to "Login", new_session_path(User), class: "btn btn-outline-secondary" %>
+      <% end %>
+    </div>
+  </div>
+</nav>
