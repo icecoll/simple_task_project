@@ -12,9 +12,9 @@
         <%= f.text_field :username, autofocus: true, class: "form-control", placeholder: "Username" %>
       </div>
       <% if resource.errors.where(:username).present? %>
-          <div class="input-group mb-3">
-            <%= resource.errors.where(:username).last.full_message %>
-          </div>
+        <div class="input-group mb-3">
+          <%= resource.errors.where(:username).last.full_message %>
+        </div>
       <% end %>
 
       <div class="input-group mb-3">
@@ -24,12 +24,29 @@
         <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "password" %>
       </div>
 
+      <% if resource.errors.where(:password).present? %>
+        <div class="input-group mb-3">
+          <%=
+            [
+              resource.errors.where(:password).last.full_message,
+              resource.errors.where(:password).last.options[:messages]
+            ].join(',')
+          %>
+        </div>
+      <% end %>
+
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="bi bi-asterisk"></i>
         </span>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "password confirmation" %>
       </div>
+
+      <% if resource.errors.where(:password_confirmation).present? %>
+        <div class="input-group mb-3">
+          <%= resource.errors.where(:password_confirmation).last.full_message %>
+        </div>
+      <% end %>
 
       <div class="actions">
         <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-outline-secondary" %>
