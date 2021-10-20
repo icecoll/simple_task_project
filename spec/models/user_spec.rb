@@ -44,4 +44,8 @@ RSpec.describe User, type: :model do
       expect(user.errors.where(:password).present?).to be_falsy
     end
   end
+
+  describe "associations" do
+    it { should have_many(:tasks) }
+  end
 end

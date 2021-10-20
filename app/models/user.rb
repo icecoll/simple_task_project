@@ -12,6 +12,8 @@ class User < ApplicationRecord
     messages: "should contains at least 1 upper case, 1 lower case, 1 number" # todo I18n
   }
 
+  has_many :tasks
+
   protected
 
   # Checks whether a password is needed or not. For validations only.

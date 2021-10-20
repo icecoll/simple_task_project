@@ -31,6 +31,8 @@ gem "bootsnap", ">= 1.4.4", require: false
 # authentication
 gem "devise"
 gem "bootstrap", "~> 5.1.0"
+# Ruby state machines
+gem "aasm"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
