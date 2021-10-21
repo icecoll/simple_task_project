@@ -12,7 +12,7 @@
         <%= f.text_field :username, autofocus: true, class: "form-control", placeholder: "Username" %>
       </div>
       <% if resource.errors.where(:username).present? %>
-        <div class="input-group mb-3">
+        <div class="input-group text-danger mb-3">
           <%= resource.errors.where(:username).last.full_message %>
         </div>
       <% end %>
@@ -25,7 +25,7 @@
       </div>
 
       <% if resource.errors.where(:password).present? %>
-        <div class="input-group mb-3">
+        <div class="input-group text-danger mb-3">
           <%=
             [
               resource.errors.where(:password).last.full_message,
@@ -43,7 +43,7 @@
       </div>
 
       <% if resource.errors.where(:password_confirmation).present? %>
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 text-danger">
           <%= resource.errors.where(:password_confirmation).last.full_message %>
         </div>
       <% end %>
