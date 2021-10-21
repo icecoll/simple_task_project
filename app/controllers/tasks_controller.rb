@@ -2,32 +2,26 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: %i[show edit update destroy]
 
-  # GET /tasks or /tasks.json
+  # GET /tasks
   def index
     @tasks = GetTasks.new(current_user, params[:show_closed_tasks] === "true").execute
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
-  def edit
-  end
-
-  # POST /tasks or /tasks.json
+  # POST /tasks
   def create
     @task = Task.new(task_params)
 
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_url }
-        format.json { render :show, status: :created, location: @task }
       else
         format.html { redirect_to tasks_url, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /tasks/1 or /tasks/1.json
+  # PATCH/PUT /tasks/1
   def update
     respond_to do |format|
       if @task.update(task_params)
@@ -38,12 +32,11 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1 or /tasks/1.json
+  # DELETE /tasks/1
   def destroy
     @task.remove!
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

@@ -29,7 +29,7 @@
             <%= t("task.is_important.#{task.is_important}") %>
           </span>
 
-          <span class="<%= task.is_important? ? 'btn-warning' : 'btn-secondary' %> btn btn-sm text-white">
+          <span class="<%= task.is_urgent? ? 'btn-warning' : 'btn-secondary' %> btn btn-sm text-white">
             <%= t("task.is_urgent.#{task.is_urgent}") %>
           </span>
         </td>

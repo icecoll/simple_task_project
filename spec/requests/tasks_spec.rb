@@ -38,29 +38,6 @@ RSpec.describe "/tasks", type: :request do
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      task = Task.create! valid_attributes
-      get task_url(task)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_task_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "render a successful response" do
-      task = Task.create! valid_attributes
-      get edit_task_url(task)
-      expect(response).to be_successful
-    end
-  end
-
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Task" do
@@ -69,9 +46,9 @@ RSpec.describe "/tasks", type: :request do
         }.to change(Task, :count).by(1)
       end
 
-      it "redirects to the created task" do
+      it "redirects to the task index" do
         post tasks_url, params: {task: valid_attributes}
-        expect(response).to redirect_to(task_url(Task.last))
+        expect(response).to redirect_to(tasks_url)
       end
     end
 
@@ -82,9 +59,9 @@ RSpec.describe "/tasks", type: :request do
         }.to change(Task, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it "responds 422" do
         post tasks_url, params: {task: invalid_attributes}
-        expect(response).to be_successful
+        expect(response).to have_http_status(422)
       end
     end
   end
