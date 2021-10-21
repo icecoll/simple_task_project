@@ -31,8 +31,7 @@
           </span>
         </td>
         <td>
-          <%= link_to 'start', task, method: :delete, class: "btn btn-sm btn-primary", data: { confirm: 'Are you sure?' } %>
-          <%= link_to 'done', task, method: :delete, class: "btn btn-sm btn-primary", data: { confirm: 'Are you sure?' } %>
+          <%= state_change_button(task) %>
         </td>
         <td>
           <%= link_to 'X', task, method: :delete, data: { confirm: 'Are you sure?' } %>

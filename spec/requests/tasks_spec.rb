@@ -13,15 +13,22 @@ require "rails_helper"
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/tasks", type: :request do
-  # Task. As you add validations to Task, be sure to
-  # adjust the attributes here as well.
+  let(:user) { User.create!(username: "username", password: "Aa11223344") } # todo: replace with factory_bot
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      description: "new task",
+      state: "opened",
+      user_id: user.id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {state: "wrong state"}
   }
+
+  before do
+    sign_in(user)
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -85,29 +92,28 @@ RSpec.describe "/tasks", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {state: "in_progress"}
       }
 
       it "updates the requested task" do
         task = Task.create! valid_attributes
         patch task_url(task), params: {task: new_attributes}
         task.reload
-        skip("Add assertions for updated state")
+        expect(task.in_progress?).to be_truthy
       end
 
-      it "redirects to the task" do
+      it "redirects to task index" do
         task = Task.create! valid_attributes
         patch task_url(task), params: {task: new_attributes}
-        task.reload
-        expect(response).to redirect_to(task_url(task))
+        expect(response).to redirect_to(tasks_url)
       end
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "redirects to task index" do
         task = Task.create! valid_attributes
         patch task_url(task), params: {task: invalid_attributes}
-        expect(response).to be_successful
+        expect(response).to redirect_to(tasks_url)
       end
     end
   end
