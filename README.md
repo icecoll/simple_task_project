@@ -1,24 +1,20 @@
-# README
+#### dependencies
+- docker
+You can get docker [here](https://docs.docker.com/get-docker/).Make sure you can run `docker` and `docker-compose` in your terminal.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Step to run the project
+Go to the project direcotory, run the follow commands:
+```
+# build
+docker-compose build
 
-Things you may want to cover:
+# start service
+docker-compose up
 
-* Ruby version
+# create db and tables
+docker-compose run web rails db:create
+docker-compose run web rails db:migrate
+```
+Visit localhost:300
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
