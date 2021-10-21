@@ -3,18 +3,19 @@ require "rails_helper"
 RSpec.describe Task, type: :model do
   describe "validations" do
     it { should validate_length_of(:description).is_at_most(400) }
+    it { should validate_presence_of(:description) }
 
     context "description words count" do
       it "should be too long when exceeds 40" do
         task = Task.new(description: "foo " * 41)
         expect(task.valid?).to be_falsy
-        expect(task.errors.where(:description).last.type).to eq(:too_long)
+        expect(task.errors.where(:description).last.type).to eq("must have at most 40 words")
       end
 
       it "should be valid when within 40" do
         task = Task.new(description: "foo " * 40)
         expect(task.valid?).to be_falsy
-        expect(task.errors.where(:description).present?).to be_truthy
+        expect(task.errors.where(:description).present?).to be_falsy
       end
     end
   end

@@ -16,7 +16,7 @@ class TasksController < ApplicationController
       if @task.save
         format.html { redirect_to tasks_url }
       else
-        format.html { redirect_to tasks_url, status: :unprocessable_entity }
+        format.html { redirect_to tasks_url, alert: @task.errors.first.full_message }
       end
     end
   end

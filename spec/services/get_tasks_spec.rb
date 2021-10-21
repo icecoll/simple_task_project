@@ -13,10 +13,10 @@ RSpec.describe GetTasks, type: :service do
 
     context "default case" do
       # todo use factory_bot
-      let!(:opened_task) { Task.create(user: user, state: "opened") }
-      let!(:in_progress_task) { Task.create(user: user, state: "in_progress") }
-      let!(:closed_task) { Task.create(user: user, state: "closed") }
-      let!(:removed_task) { Task.create(user: user, state: "removed") }
+      let!(:opened_task) { Task.create(user: user, state: "opened", description: "description") }
+      let!(:in_progress_task) { Task.create(user: user, state: "in_progress", description: "description") }
+      let!(:closed_task) { Task.create(user: user, state: "closed", description: "description") }
+      let!(:removed_task) { Task.create(user: user, state: "removed", description: "description") }
 
       it "returns opened tasks" do
         expect(subject.pluck(:state)).to include("opened")
@@ -36,7 +36,7 @@ RSpec.describe GetTasks, type: :service do
     end
 
     context "with show_closed_tasks" do
-      let!(:closed_task) { Task.create(user: user, state: "closed") }
+      let!(:closed_task) { Task.create(user: user, state: "closed", description: "description") }
       let(:show_closed_tasks) { true }
 
       it "returns closed tasks" do

@@ -61,7 +61,7 @@ RSpec.describe "/tasks", type: :request do
 
       it "responds 422" do
         post tasks_url, params: {task: invalid_attributes}
-        expect(response).to have_http_status(422)
+        expect(response).to redirect_to(tasks_url)
       end
     end
   end

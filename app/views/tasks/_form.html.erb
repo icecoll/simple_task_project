@@ -1,16 +1,5 @@
 <div>
   <%= form_with(model: task, class: "row g-3", id: "task-form") do |form| %>
-    <% if task.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-        <ul>
-          <% task.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
 
     <%= hidden_field_tag "task[user_id]", current_user.id %>
 
@@ -19,11 +8,11 @@
       <%= form.text_field :description, class: "form-control", id: "input-description" %>
     </div>
 
-    <div class="col-md-1">
-      <%= form.submit class: "btn btn-lg btn-primary", value: "add" %>
+    <div class="col-md-1 d-flex flex-column">
+      <%= form.submit class: "btn btn-lg btn-primary mt-auto", value: "add" %>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-2 d-flex flex-column">
       <div>
         <%= form.radio_button :is_important, false, checked: true, class: "form-check-input" %>
         <label class="form-check-label">
@@ -31,7 +20,7 @@
         </label>
       </div>
 
-      <div>
+      <div  class="mt-auto">
         <%= form.radio_button :is_urgent, false, checked: true, class: "form-check-input" %>
         <label class="form-check-label">
           not urgent
@@ -39,7 +28,7 @@
       </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-2 d-flex flex-column">
       <div>
         <%= form.radio_button :is_important, true, class: "form-check-input" %>
         <label class="form-check-label">
@@ -47,7 +36,7 @@
         </label>
       </div>
 
-      <div>
+      <div class="mt-auto">
         <%= form.radio_button :is_urgent, true, class: "form-check-input" %>
         <label class="form-check-label">
         urgent
