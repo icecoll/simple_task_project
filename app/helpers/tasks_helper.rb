@@ -21,4 +21,10 @@ module TasksHelper
       params: {task: {state: state}}
     )
   end
+
+  def get_state_button_class(task)
+    return "btn-primary" if task.opened?
+    return "btn-success" if task.in_progress?
+    return "btn-secondary" if task.closed?
+  end
 end

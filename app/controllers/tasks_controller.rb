@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = GetTasks.new(current_user, params[:show_closed_tasks] === "true").execute
     @task = Task.new
   end
 

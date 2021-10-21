@@ -3,10 +3,13 @@
     <tr>
       <th scope="col" colspan="4">
         <div class="d-flex">
-          <span>Tasks</span>
-          <span>
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          <span class="col-3">Tasks</span>
+          <span class="col-3 offset-6 text-end">
+            <%= check_box_tag '', nil, params[:show_closed_tasks] === "true",
+                class: "form-check-input",
+                onclick: "document.location.href=`/tasks?show_closed_tasks=${this.checked}`;"
+            %>
+            <label class="form-check-label" for="exampleCheck1">Show closed tasks</label>
           </span>
         </div>
       </th>
@@ -17,16 +20,16 @@
       <tr>
         <td>
           <%= task.description %>
-          <span class="tn btn-primary btn-sm text-white disabled">
+          <span class="<%= get_state_button_class(task) %> btn btn-sm text-white disabled">
             <%= t("task.state.#{task.state}") %>
           </span>
         </td>
-        <td>
-          <span class="tn btn-primary btn-sm text-white disabled">
+        <td class="text-center">
+          <span class="<%= task.is_important? ? 'btn-danger' : 'btn-secondary' %> btn btn-sm text-white">
             <%= t("task.is_important.#{task.is_important}") %>
           </span>
 
-          <span class="tn btn-primary btn-sm text-white disabled">
+          <span class="<%= task.is_important? ? 'btn-warning' : 'btn-secondary' %> btn btn-sm text-white">
             <%= t("task.is_urgent.#{task.is_urgent}") %>
           </span>
         </td>
