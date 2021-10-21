@@ -119,11 +119,11 @@ RSpec.describe "/tasks", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested task" do
+    it "change state to removed" do
       task = Task.create! valid_attributes
-      expect {
-        delete task_url(task)
-      }.to change(Task, :count).by(-1)
+      delete task_url(task)
+      task.reload
+      expect(task.removed?).to be_truthy
     end
 
     it "redirects to the tasks list" do
