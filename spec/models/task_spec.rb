@@ -31,15 +31,15 @@ RSpec.describe Task, type: :model do
 
       it { expect(opened_task).to have_state(:opened) }
       it { expect(opened_task).to transition_from(:opened).to(:in_progress).on_event(:start) }
-      it { expect(opened_task).to transition_from(:opened).to(:deleted).on_event(:delete) }
+      it { expect(opened_task).to transition_from(:opened).to(:removed).on_event(:remove) }
       it { expect(opened_task).to_not allow_transition_to(:done) }
 
       it { expect(in_progress_task).to have_state(:in_progress) }
       it { expect(in_progress_task).to transition_from(:in_progress).to(:closed).on_event(:done) }
-      it { expect(in_progress_task).to transition_from(:in_progress).to(:deleted).on_event(:delete) }
+      it { expect(in_progress_task).to transition_from(:in_progress).to(:removed).on_event(:remove) }
       it { expect(in_progress_task).to_not allow_transition_to(:opened) }
 
-      it { expect(closed_task).to transition_from(:closed).to(:deleted).on_event(:delete) }
+      it { expect(closed_task).to transition_from(:closed).to(:removed).on_event(:remove) }
       it { expect(closed_task).to_not allow_transition_to(:opened) }
       it { expect(closed_task).to_not allow_transition_to(:in_progress) }
     end

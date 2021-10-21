@@ -3,7 +3,7 @@ class Task < ApplicationRecord
 
   aasm column: "state" do
     state :opened, initial: true
-    state :in_progress, :closed, :deleted
+    state :in_progress, :closed, :removed
 
     event :start do
       transitions from: :opened, to: :in_progress
@@ -13,12 +13,12 @@ class Task < ApplicationRecord
       transitions from: :in_progress, to: :closed
     end
 
-    event :delete do
-      transitions from: [:opened, :in_progress, :closed], to: :deleted
+    event :remove do
+      transitions from: [:opened, :in_progress, :closed], to: :removed
     end
   end
 
-  STATE_ENUM = %w[opened in_progress closed deleted]
+  STATE_ENUM = %w[opened in_progress closed removed]
 
   validates :description, length: {maximum: 40, tokenizer: ->(str) { str.scan(/\w+/) }}
   validates :description, length: {maximum: 400}

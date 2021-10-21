@@ -1,0 +1,12 @@
+en:
+  task:
+    state:
+      opened: "open"
+      in_progress: "process"
+      closed: "closed"
+    is_urgent:
+      true: "urgent"
+      false: "not urgt"
+    is_important:
+      true: "important"
+      false: "not impt"

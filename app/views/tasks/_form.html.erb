@@ -1,32 +1,58 @@
-<%= form_with(model: task) do |form| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<div>
+  <%= form_with(model: task, class: "row g-3", id: "task-form") do |form| %>
+    <% if task.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
-      <ul>
-        <% task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% task.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= hidden_field_tag "task[user_id]", current_user.id %>
+
+    <div class="col-md-7">
+      <label for="description" class="form-label">enter your task</label>
+      <%= form.text_field :description, class: "form-control", id: "input-description" %>
+    </div>
+
+    <div class="col-md-1">
+      <%= form.submit class: "btn btn-lg btn-primary", value: "add" %>
+    </div>
+
+    <div class="col-md-2">
+      <div>
+        <%= form.radio_button :is_important, false, checked: true, class: "form-check-input" %>
+        <label class="form-check-label">
+          not important
+        </label>
+      </div>
+
+      <div>
+        <%= form.radio_button :is_urgent, false, checked: true, class: "form-check-input" %>
+        <label class="form-check-label">
+          not urgent
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div>
+        <%= form.radio_button :is_important, true, class: "form-check-input" %>
+        <label class="form-check-label">
+          important
+        </label>
+      </div>
+
+      <div>
+        <%= form.radio_button :is_urgent, true, class: "form-check-input" %>
+        <label class="form-check-label">
+        urgent
+        </label>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :priority %>
-    <%= form.text_field :priority %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

@@ -1,17 +1,45 @@
 <table class="table table-bordered">
   <thead class="table-primary">
     <tr>
-      <th scope="col" colspan="4">Tasks</th>
+      <th scope="col" colspan="4">
+        <div class="d-flex">
+          <span>Tasks</span>
+          <span>
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          </span>
+        </div>
+      </th>
     </tr>
   </thead>
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.description %> <%= task.state %></td>
-        <td><%= task.priority %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= task.description %>
+          <span class="tn btn-primary btn-sm text-white disabled">
+            <%= t("task.state.#{task.state}") %>
+          </span>
+        </td>
+        <td>
+          <span class="tn btn-primary btn-sm text-white disabled">
+            <%= t("task.is_important.#{task.is_important}") %>
+          </span>
+
+          <span class="tn btn-primary btn-sm text-white disabled">
+            <%= t("task.is_urgent.#{task.is_urgent}") %>
+          </span>
+        </td>
+        <td>
+          <%= link_to 'start', task, method: :delete, class: "btn btn-sm btn-primary", data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'done', task, method: :delete, class: "btn btn-sm btn-primary", data: { confirm: 'Are you sure?' } %>
+        </td>
+        <td>
+          <%= link_to 'X', task, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= render 'form', task: @task %>
