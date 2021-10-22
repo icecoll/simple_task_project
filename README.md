@@ -1,8 +1,9 @@
-#### dependencies
+## dependencies
 - docker
+
 You can get docker [here](https://docs.docker.com/get-docker/).Make sure you can run `docker` and `docker-compose` in your terminal.
 
-#### Step to run the project
+## Step to run the project
 Go to the project direcotory, run the follow commands:
 ```
 # build
@@ -20,10 +21,20 @@ docker-compose run web bundle exec rspec
 ```
 Visit localhost:300
 
-#### Schema
+
+## Errors you may encounter
+- when you run `docker-compose build`, it throws a error like:
+```
+ERROR: Version in "./docker-compose.yml" is unsupported. You might be seeing this error because you're using the wrong Compose file version. 
+Either specify a supported version(e.g "2.2" or "3.3") and place your service definitions under the `services` key...
+```
+just edit the docker-compose.yml and change the version to 3.3.
+
+- when you run `docker-compose up`, it throws error like missing some gem(e.g. nokogiri), then you might need to run `docker-compose run web bundle install`. Actually the Dockerfile has contained this command, i think it may be OS issue, i encountered this in Ubuntu.
+
+## Schema
 ```
 ActiveRecord::Schema.define(version: 2021_10_20_131906) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,3 +59,14 @@ ActiveRecord::Schema.define(version: 2021_10_20_131906) do
 
 end
 ```
+
+## TODO list
+- Use `factory_bot` and `faker` to generate data in rspec.
+- I18n, need to extract the wordings like alert message to `config/locales` file.
+- use `dotenv` to store env variables.
+- use `simplecov` to track rspec coverage.
+- configuration for `git push` to make sure `standardrb` was run.
+
+## Screenshot
+![image](https://github.com/icecoll/simple_task_project/blob/main/screenshot.png)
+
